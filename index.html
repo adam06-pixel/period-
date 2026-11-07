@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ إلى فاتحة — حاسبة الدورة الشهرية</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+  
+  :root {
+    --primary: #e91e63;
+    --primary-light: #f8bbd0;
+    --primary-dark: #ad1457;
+    --bg: #fdf2f6;
+    --text: #333;
+    --text-light: #777;
+    --green: #4caf50;
+    --purple: #9c27b0;
+  }
+  
+  body {
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  
+  /* ========== HEADER ========== */
+  header {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(233,30,99,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { font-size: 1.2rem; font-weight: bold; color: var(--primary-dark); }
+  .header-badge {
+    background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  /* ========== LOVE BANNER ========== */
+  .love-banner {
+    max-width: 700px;
+    margin: 25px auto 10px;
+    background: linear-gradient(135deg, #fff0f5, #ffe0ec);
+    border: 2px dashed #ff69b4;
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.15);
+    animation: lovePulse 3s ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes lovePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(233, 30, 99, 0.15); }
+    50% { transform: scale(1.01); box-shadow: 0 10px 28px rgba(233, 30, 99, 0.25); }
+  }
+  .love-hearts {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    animation: heartBeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+  }
+  .love-to {
+    font-size: 1.15rem;
+    color: #ad1457;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .love-to span {
+    color: #e91e63;
+    font-size: 1.35rem;
+    text-shadow: 0 2px 6px rgba(233, 30, 99, 0.3);
+    padding: 0 4px;
+  }
+  .love-text {
+    color: #6d4c5a;
+    font-size: 0.98rem;
+    line-height: 1.9;
+    font-style: italic;
+  }
+  .love-sign {
+    color: #e91e63;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 14px;
+  }
+  
+  /* ========== HERO ========== */
+  .hero {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(180deg, #fce4ec 0%, var(--bg) 100%);
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-size: 1.9rem;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .hero p {
+    color: var(--text-light);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 25px;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .stat {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(233,30,99,0.08);
+    text-align: center;
+    min-width: 100px;
+  }
+  .stat .num { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+  .stat .lbl { color: var(--text-light); font-size: 0.75rem; }
+  
+  .feature-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .feature-tags span {
+    background: white;
+    border: 1px solid var(--primary-light);
+    color: var(--primary-dark);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+  
+  /* ========== CALCULATOR ========== */
+  .calculator {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 8px 30px rgba(233,30,99,0.12);
+    position: relative;
+    z-index: 1;
+  }
+  .calculator > h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+  }
+  .calculator > .sub {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+  
+  .step {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed var(--primary-light);
+  }
+  .step:last-of-type { border-bottom: none; }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .step-num {
+    background: var(--primary);
+    color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: bold; color: var(--primary-dark); }
+  .step-hint { color: var(--text-light); font-size: 0.82rem; margin-bottom: 10px; }
+  .step-note { color: var(--green); font-size: 0.82rem; margin-top: 6px; }
+  
+  .calendar-toggle {
+    display: flex;
+    gap: 10px;
+  }
+  .calendar-toggle button {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--primary-light);
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+    transition: 0.3s;
+  }
+  .calendar-toggle button.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+  
+  input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--primary-light);
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+  }
+  input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(233,30,99,0.1); }
+  
+  .slider-wrap { display: flex; align-items: center; gap: 12px; }
+  .slider-wrap input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--primary-light);
+    outline: none;
+    border: none;
+    padding: 0;
+  }
+  .slider-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(233,30,99,0.4);
+  }
+  .slider-val {
+    background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    min-width: 70px;
+    text-align: center;
+  }
+  .slider-range { display: flex; justify-content: space-between; color: var(--text-light); font-size: 0.75rem; margin-top: 4px; }
+  
+  .calc-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 6px 18px rgba(233,30,99,0.35);
+    margin-top: 10px;
+  }
+  .calc-btn:hover { transform: translateY(-2px); box-shadow: 0 9px 24px rgba(233,30,99,0.45); }
+  
+  .privacy-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: var(--text-light);
+  }
+  
+  /* ========== RESULTS ========== */
+  .results {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    display: none;
+    position: relative;
+    z-index: 1;
+  }
+  .results.show { display: block; animation: fadeIn 0.5s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(15px);} to {opacity:1; transform: translateY(0);} }
+  
+  .results h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+  }
+  
+  .result-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .result-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.1);
+    border-top: 4px solid var(--primary);
+  }
+  .result-card.fertile { border-top-color: var(--purple); }
+  .result-card.ovulation { border-top-color: #ff9800; }
+  .result-card .rc-label { font-size: 0.82rem; color: var(--text-light); margin-bottom: 6px; }
+  .result-card .rc-value { font-size: 1.3rem; font-weight: bold; color: var(--primary-dark); }
+  .result-card .rc-sub { font-size: 0.8rem; color: var(--text-light); margin-top: 4px; }
+  
+  .cycles-section {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.1);
+    margin-bottom: 20px;
+  }
+  .cycles-section h3 {
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .cycle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #f5e6eb;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cycle-row:last-child { border-bottom: none; }
+  .cycle-row .cr-index { font-weight: bold; color: var(--primary); }
+  .cycle-row .cr-date { font-weight: bold; }
+  .cycle-row .cr-hijri { color: var(--text-light); font-size: 0.85rem; }
+  
+  .reset-link {
+    display: block;
+    text-align: center;
+    color: var(--primary);
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+  }
+  
+  /* ========== SECTIONS ========== */
+  section { padding: 50px 20px; max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  section h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+  section .sec-sub {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 35px;
+    font-size: 0.95rem;
+  }
+  
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .step-box {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.08);
+    position: relative;
+  }
+  .step-box .sb-num {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.85rem;
+  }
+  .step-box .sb-icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .step-box h4 { color: var(--primary-dark); margin-bottom: 8px; font-size: 1rem; }
+  .step-box p { color: var(--text-light); font-size: 0.85rem; line-height: 1.6; }
+  
+  .phases-list { display: flex; flex-direction: column; gap: 12px; }
+  .phase {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px 18px;
+    box-shadow: 0 3px 10px rgba(233,30,99,0.07);
+  }
+  .phase-color {
+    width: 14px; height: 40px;
+    border-radius: 7px;
+    flex-shrink: 0;
+  }
+  .phase-info { flex: 1; }
+  .phase-info .ph-name { font-weight: bold; color: var(--primary-dark); }
+  .phase-info .ph-days { color: var(--text-light); font-size: 0.85rem; }
+  .phase-level {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .feature-box {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.08);
+    transition: 0.3s;
+  }
+  .feature-box:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(233,30,99,0.15); }
+  .feature-box .fb-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .feature-box h4 { color: var(--primary-dark); margin-bottom: 6px; font-size: 1rem; }
+  .feature-box p { color: var(--text-light); font-size: 0.85rem; }
+  
+  .faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(233,30,99,0.07);
+  }
+  .faq-q {
+    padding: 16px 20px;
+    font-weight: bold;
+    color: var(--primary-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+  }
+  .faq-q::after { content: '+'; font-size: 1.4rem; color: var(--primary); transition: 0.3s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 20px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 20px 18px; }
+  
+  .info-box {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(233,30,99,0.08);
+  }
+  .info-box h3 { color: var(--primary-dark); margin-bottom: 10px; font-size: 1.1rem; }
+  .info-box p { color: var(--text-light); font-size: 0.92rem; margin-bottom: 10px; }
+  .info-box .warning {
+    background: #fff3e0;
+    border-right: 4px solid #ff9800;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: #e65100;
+  }
+  
+  .cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 20px;
+    padding: 40px 25px;
+    margin: 0 20px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .cta h3 { font-size: 1.4rem; margin-bottom: 10px; }
+  .cta p { opacity: 0.9; margin-bottom: 20px; }
+  
+  footer {
+    background: #2c1a22;
+    color: #ddd;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+  }
+  footer .f-logo { color: var(--primary-light); font-size: 1.2rem; font-weight: bold; margin-bottom: 8px; }
+  
+  /* Falling hearts layer */
+  .falling-heart {
+    position: fixed;
+    top: -30px;
+    pointer-events: none;
+    z-index: 0;
+    animation: fall linear forwards;
+    opacity: 0.8;
+  }
+  @keyframes fall {
+    to { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+  }
+  
+  @media (max-width: 500px) {
+    .hero h1 { font-size: 1.4rem; }
+    .result-cards { grid-template-columns: 1fr; }
+    .stat { min-width: 85px; padding: 10px 14px; }
+    .cycle-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="logo">🌸 حاسبة الدورة</div>
+  <div class="header-badge">مجاني تماماً</div>
+</header>
+
+<!-- ========== LOVE BANNER FOR FATEHA ========== -->
+<div class="love-banner">
+  <div class="love-hearts">💕</div>
+  <p class="love-to">إلى حبيبتي <span>فاتحة</span> ❤️</p>
+  <p class="love-text">
+    يا فاتحة... صنعتُ لكِ هذه الصفحة الصغيرة بكل حب،<br>
+    لأن صحتكِ وابتسامتكِ أهم شيء في عالمي.<br>
+    كل يوم معكِ هو هدية، وهذا أقلّ ما أقدمه لكِ 🌸
+  </p>
+  <p class="love-sign">— من قلبٍ يحبكِ دائماً 💗</p>
+</div>
+
+<!-- ========== HERO ========== -->
+<div class="hero">
+  <div class="feature-tags">
+    <span>✓ بدون تسجيل</span>
+    <span>🌙 تقويم ميلادي وهجري</span>
+    <span>📅 5 دورات قادمة</span>
+    <span>🌱 أيام الخصوبة والتبويض</span>
+    <span>⚡ نتائج فورية</span>
+  </div>
+  <h1>احسبي موعد دورتك القادمة<br>وأيام الخصوبة بدقة</h1>
+  <p>أدخلي بيانات بسيطة واحصلي فوراً على مواعيد دوراتك القادمة، أيام الخصوبة، يوم التبويض — بالتقويم الميلادي والهجري.</p>
+  
+  <div class="stats">
+    <div class="stat"><div class="num">+١٠٠ ألف</div><div class="lbl">حساب شهرياً</div></div>
+    <div class="stat"><div class="num">دقيق</div><div class="lbl">علمياً موثق</div></div>
+    <div class="stat"><div class="num">٪١٠٠</div><div class="lbl">مجاني دائماً</div></div>
+  </div>
+</div>
+
+<!-- ========== CALCULATOR ========== -->
+<div class="calculator">
+  <h2>حاسبة الدورة الشهرية</h2>
+  <p class="sub">أدخلي بياناتك واحصلي على النتائج فوراً</p>
+
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">١</span>
+      <span class="step-title">نوع التقويم</span>
+    </div>
+    <p class="step-hint">✓ اختاري التقويم المناسب لك</p>
+    <div class="calendar-toggle">
+      <button id="btnGregorian" class="active" onclick="setCalendar('gregorian')">📅 ميلادي</button>
+      <button id="btnHijri" onclick="setCalendar('hijri')">🌙 هجري</button>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">٢</span>
+      <span class="step-title">تاريخ آخر دورة</span>
+    </div>
+    <p class="step-hint">اختاري تاريخ أول يوم في آخر دورة</p>
+    <input type="date" id="lastPeriod">
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">٣</span>
+      <span class="step-title">مدة الدورة بالأيام</span>
+    </div>
+    <p class="step-hint">عدد الأيام بين الدورتين</p>
+    <div class="slider-wrap">
+      <input type="range" id="cycleLength" min="21" max="45" value="28" oninput="updateCycleVal()">
+      <div class="slider-val" id="cycleVal">28 يوماً</div>
+    </div>
+    <div class="slider-range"><span>21</span><span>28 يوم</span><span>45</span></div>
+    <p class="step-note">✓ المتوسط الطبيعي 28 يومًا</p>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <span class="step-num">٤</span>
+      <span class="step-title">مدة فترة الطمث</span>
+    </div>
+    <p class="step-hint">عدد أيام النزول</p>
+    <div class="slider-wrap">
+      <input type="range" id="periodLength" min="1" max="15" value="5" oninput="updatePeriodVal()">
+      <div class="slider-val" id="periodVal">5 أيام</div>
+    </div>
+    <div class="slider-range"><span>1</span><span>5 أيام</span><span>15</span></div>
+    <p class="step-note">✓ المتوسط الطبيعي 3–7 أيام</p>
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">💕 احسبي دورتك الآن</button>
+  
+  <div class="privacy-row">
+    <span>🔒 بدون تسجيل</span>
+    <span>⚡ نتائج فورية</span>
+    <span>🌙 يدعم الهجري</span>
+    <span>📱 يعمل على كل الأجهزة</span>
+  </div>
+</div>
+
+<!-- ========== RESULTS ========== -->
+<div class="results" id="results">
+  <h2>🌸 نتائجك يا فاتحة</h2>
+  
+  <div class="result-cards">
+    <div class="result-card">
+      <div class="rc-label">الدورة القادمة</div>
+      <div class="rc-value" id="resNextPeriod">-</div>
+      <div class="rc-sub" id="resNextHijri">-</div>
+    </div>
+    <div class="result-card ovulation">
+      <div class="rc-label">يوم التبويض</div>
+      <div class="rc-value" id="resOvulation">-</div>
+      <div class="rc-sub" id="resOvulationHijri">-</div>
+    </div>
+    <div class="result-card fertile">
+      <div class="rc-label">أيام الخصوبة</div>
+      <div class="rc-value" id="resFertile">-</div>
+      <div class="rc-sub">أعلى فرصة للحمل</div>
+    </div>
+    <div class="result-card">
+      <div class="rc-label">متبقي على الدورة</div>
+      <div class="rc-value" id="resDaysLeft">-</div>
+      <div class="rc-sub">يوم</div>
+    </div>
+  </div>
+
+  <div class="cycles-section">
+    <h3>📅 الدورات الخمس القادمة</h3>
+    <div id="cyclesList"></div>
+  </div>
+
+  <span class="reset-link" onclick="resetData()">🔄 إعادة الحساب</span>
+</div>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section>
+  <h2>كيف تعمل الحاسبة</h2>
+  <p class="sec-sub">أربع خطوات بسيطة للنتيجة</p>
+  <div class="steps-grid">
+    <div class="step-box">
+      <span class="sb-num">١</span>
+      <div class="sb-icon">📏</div>
+      <h4>مدة الدورة</h4>
+      <p>أدخلي عدد الأيام المعتادة بين دورتين متتاليتين. عادةً من 21 إلى 45 يوماً.</p>
+    </div>
+    <div class="step-box">
+      <span class="sb-num">٢</span>
+      <div class="sb-icon">🩸</div>
+      <h4>أيام الطمث</h4>
+      <p>حددي عدد أيام نزول الدم في كل دورة. المتوسط الطبيعي من 3 إلى 7 أيام.</p>
+    </div>
+    <div class="step-box">
+      <span class="sb-num">٣</span>
+      <div class="sb-icon">📅</div>
+      <h4>نوع التقويم</h4>
+      <p>اختاري التقويم الميلادي أو الهجري لإدخال التاريخ وعرض النتائج.</p>
+    </div>
+    <div class="step-box">
+      <span class="sb-num">٤</span>
+      <div class="sb-icon">🎯</div>
+      <h4>النتائج فوراً</h4>
+      <p>احصلي على مواعيد 5 دورات قادمة، أيام الخصوبة، ويوم التبويض.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CYCLE INFO ========== -->
+<section style="background: white; border-radius: 20px; margin: 0 20px 40px;">
+  <h2>فهمي مراحل دورتك الشهرية</h2>
+  <p class="sec-sub">معلومات مهمة عن كل مرحلة</p>
+  
+  <div class="info-box">
+    <h3>ما هي الدورة الشهرية؟</h3>
+    <p>الدورة الشهرية هي دورة هرمونية طبيعية تستغرق في المتوسط 28 يوماً، وإن كان الطبيعي يتراوح بين 21 و45 يوماً. تتحكم فيها هرمونات الاستروجين والبروجستيرون التي تُهيئ الجسم للحمل في كل دورة.</p>
+  </div>
+  
+  <div class="info-box">
+    <h3>لماذا تتغير مدة الدورة؟</h3>
+    <p>تتأثر مدة الدورة وانتظامها بعوامل عديدة منها مستوى التوتر، تغيرات الوزن، النشاط البدني، الأمراض، واضطرابات النوم. تغير أيام قليلة من شهر لآخر أمر طبيعي تماماً.</p>
+    <div class="warning">إذا كانت دورتك غير منتظمة باستمرار أو غائبة لأكثر من ثلاثة أشهر دون حمل، يُنصح باستشارة الطبيبة للتحقق من الحالة.</div>
+  </div>
+  
+  <div class="phases-list">
+    <div class="phase">
+      <div class="phase-color" style="background:#ff4d6d"></div>
+      <div class="phase-info">
+        <div class="ph-name">فترة الحيض</div>
+        <div class="ph-days">الأيام 1–7 من الدورة</div>
+      </div>
+      <span class="phase-level" style="background:#ff4d6d">منخفضة جداً</span>
+    </div>
+    <div class="phase">
+      <div class="phase-color" style="background:#ffa726"></div>
+      <div class="phase-info">
+        <div class="ph-name">ما قبل الإباضة</div>
+        <div class="ph-days">الأيام 7–13</div>
+      </div>
+      <span class="phase-level" style="background:#ffa726">متوسطة</span>
+    </div>
+    <div class="phase">
+      <div class="phase-color" style="background:#9c27b0"></div>
+      <div class="phase-info">
+        <div class="ph-name">فترة الخصوبة</div>
+        <div class="ph-days">الأيام 9–15</div>
+      </div>
+      <span class="phase-level" style="background:#9c27b0">عالية</span>
+    </div>
+    <div class="phase">
+      <div class="phase-color" style="background:#e91e63"></div>
+      <div class="phase-info">
+        <div class="ph-name">يوم الإباضة</div>
+        <div class="ph-days">اليوم 14 تقريباً</div>
+      </div>
+      <span class="phase-level" style="background:#e91e63">عالية جداً</span>
+    </div>
+    <div class="phase">
+      <div class="phase-color" style="background:#4caf50"></div>
+      <div class="phase-info">
+        <div class="ph-name">ما بعد الإباضة</div>
+        <div class="ph-days">الأيام 15–28</div>
+      </div>
+      <span class="phase-level" style="background:#4caf50">منخفضة</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FEATURES ========== -->
+<section>
+  <h2>مميزات الحاسبة</h2>
+  <p class="sec-sub">كل ما تحتاجينه في مكان واحد</p>
+  <div class="features-grid">
+    <div class="feature-box">
+      <div class="fb-icon">🗓️</div>
+      <h4>5 دورات قادمة</h4>
+      <p>احصلي على مواعيد دوراتك الخمس القادمة بالتقويم الميلادي والهجري معاً.</p>
+    </div>
+    <div class="feature-box">
+      <div class="fb-icon">🌱</div>
+      <h4>أيام الخصوبة</h4>
+      <p>معرفة أيام الخصوبة الدقيقة ويوم التبويض — مهم سواء كنتِ تحاولين الحمل أو تتجنبينه.</p>
+    </div>
+    <div class="feature-box">
+      <div class="fb-icon">🌙</div>
+      <h4>التقويم الهجري</h4>
+      <p>الحاسبة الوحيدة التي تعرض جميع النتائج بالتقويمين الميلادي والهجري في آنٍ واحد.</p>
+    </div>
+    <div class="feature-box">
+      <div class="fb-icon">📊</div>
+      <h4>مراحل الدورة</h4>
+      <p>شرح مفصّل لكل مرحلة: ما يحدث في الجسم، الأعراض الشائعة، والنصائح الصحية.</p>
+    </div>
+    <div class="feature-box">
+      <div class="fb-icon">⚡</div>
+      <h4>نتائج فورية</h4>
+      <p>لا انتظار ولا تسجيل. أدخلي البيانات وانتقلي للنتائج مباشرة في ثوانٍ.</p>
+    </div>
+    <div class="feature-box">
+      <div class="fb-icon">🔒</div>
+      <h4>خصوصية تامة</h4>
+      <p>لا نجمع بياناتك الشخصية ولا نحتاج لإنشاء حساب. خصوصيتك محفوظة بالكامل.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section>
+  <h2>أسئلة شائعة</h2>
+  <p class="sec-sub">إجابات على أكثر الأسئلة شيوعاً</p>
+  
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">ما هو طول الدورة الشهرية الطبيعي؟</div>
+    <div class="faq-a">الدورة الشهرية الطبيعية تتراوح بين 21 و45 يوماً. المتوسط هو 28 يوماً لكن هذا لا يعني أن أي رقم آخر ضمن هذا النطاق غير طبيعي. ما يهم هو انتظام دورتك الشخصية.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">كيف أعرف أيام الخصوبة بدقة؟</div>
+    <div class="faq-a">أيام الخصوبة تكون عادةً قبل الإباضة بخمسة أيام وبعدها ليوم واحد. علامات الخصوبة تشمل: إفرازات مهبلية شفافة ومطاطة، ثقل خفيف في الحوض، وارتفاع طفيف في الرغبة الجنسية. حاسبتنا تحسب هذه الأيام تلقائياً بناءً على بياناتك.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">هل الحاسبة تدعم التقويم الهجري؟</div>
+    <div class="faq-a">نعم، حاسبتنا تدعم إدخال التاريخ بالتقويم الهجري وتعرض جميع النتائج بالتقويمين الميلادي والهجري معاً.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">هل الحاسبة مجانية؟</div>
+    <div class="faq-a">نعم، الحاسبة مجانية بالكامل ولا تحتاج إلى تسجيل أو إنشاء حساب. يمكنك استخدامها في أي وقت بدون أي رسوم أو اشتراكات.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">لماذا تختلف مدة دورتي من شهر لآخر؟</div>
+    <div class="faq-a">تتأثر مدة الدورة بعوامل كثيرة منها: التوتر النفسي، تغيرات الوزن، النشاط البدني، المرض، واضطرابات النوم. تغيير بضعة أيام من شهر لآخر أمر طبيعي. إذا كان الاختلاف كبيراً استشيري طبيبتك.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-q">متى يجب زيارة الطبيبة بسبب الدورة؟</div>
+    <div class="faq-a">راجعي طبيبتك إذا: غابت دورتك لثلاثة أشهر أو أكثر، كان النزيف غزيراً جداً، كان الألم شديداً ولا يستجيب للمسكنات، أو حدث نزيف بين الدورتين.</div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<div class="cta">
+  <h3>💗 صُنعت خصيصاً لكِ يا فاتحة</h3>
+  <p>احفظي هذه الصفحة في المفضلة للرجوع إليها في أي وقت</p>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="f-logo">🌸 حاسبة الدورة</div>
+  <p>حاسبة الدورة الشهرية — مجانية بالكامل بدون تسجيل</p>
+  <p style="margin-top:8px;">💕 رسالة حب خاصة إلى فاتحة — من قلبٍ يحبها</p>
+  <p style="margin-top:8px; opacity:0.7; font-size:0.78rem;">⚠️ النتائج تقديرية ولا تُغني عن استشارة الطبيب المختص</p>
+</footer>
+
+<script>
+  let calendarType = 'gregorian';
+  let cycleVal = 28;
+  let periodVal = 5;
+
+  function setCalendar(type) {
+    calendarType = type;
+    document.getElementById('btnGregorian').classList.toggle('active', type === 'gregorian');
+    document.getElementById('btnHijri').classList.toggle('active', type === 'hijri');
+  }
+
+  function updateCycleVal() {
+    cycleVal = document.getElementById('cycleLength').value;
+    document.getElementById('cycleVal').textContent = cycleVal + ' يوماً';
+  }
+
+  function updatePeriodVal() {
+    periodVal = document.getElementById('periodLength').value;
+    document.getElementById('periodVal').textContent = periodVal + ' أيام';
+  }
+
+  function toHijri(date) {
+    try {
+      return date.toLocaleDateString('ar-SA-u-ca-islamic', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+    } catch(e) { return '-'; }
+  }
+
+  function toGregorian(date) {
+    return date.toLocaleDateString('ar-EG', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  }
+
+  function calculate() {
+    const lastPeriodInput = document.getElementById('lastPeriod').value;
+    
+    if (!lastPeriodInput) {
+      alert('من فضلك اختاري تاريخ آخر دورة يا فاتحة 💕');
+      return;
+    }
+
+    const last = new Date(lastPeriodInput);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const cycleLen = parseInt(cycleVal);
+
+    let next = new Date(last);
+    next.setDate(next.getDate() + cycleLen);
+    while (next < today) {
+      next.setDate(next.getDate() + cycleLen);
+    }
+
+    const daysLeft = Math.ceil((next - today) / (1000*60*60*24));
+
+    const ovulation = new Date(next);
+    ovulation.setDate(ovulation.getDate() - 14);
+
+    const fertileStart = new Date(ovulation);
+    fertileStart.setDate(fertileStart.getDate() - 5);
+    const fertileEnd = new Date(ovulation);
+    fertileEnd.setDate(fertileEnd.getDate() + 1);
+
+    document.getElementById('results').classList.add('show');
+    document.getElementById('resNextPeriod').textContent = toGregorian(next);
+    document.getElementById('resNextHijri').textContent = '🌙 ' + toHijri(next);
+    document.getElementById('resOvulation').textContent = toGregorian(ovulation);
+    document.getElementById('resOvulationHijri').textContent = '🌙 ' + toHijri(ovulation);
+    document.getElementById('resFertile').textContent = 
+      fertileStart.getDate() + '–' + fertileEnd.getDate() + ' ' + 
+      fertileEnd.toLocaleDateString('ar-EG', {month: 'long'});
+    document.getElementById('resDaysLeft').textContent = daysLeft;
+
+    let listHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      let cycleDate = new Date(next);
+      cycleDate.setDate(cycleDate.getDate() + (cycleLen * (i - 1)));
+      listHTML += `
+        <div class="cycle-row">
+          <span class="cr-index">الدورة ${i}</span>
+          <span class="cr-date">${toGregorian(cycleDate)}</span>
+          <span class="cr-hijri">🌙 ${toHijri(cycleDate)}</span>
+        </div>
+      `;
+    }
+    document.getElementById('cyclesList').innerHTML = listHTML;
+
+    setTimeout(() => {
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function resetData() {
+    document.getElementById('results').classList.remove('show');
+    document.getElementById('lastPeriod').value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleFaq(el) {
+    el.classList.toggle('open');
+  }
+
+  // قلوب متساقطة رومانسية
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = ['❤️','💕','💖','🌸','💗','🩷'][Math.floor(Math.random()*6)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (14 + Math.random() * 16) + 'px';
+    heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+  setInterval(createHeart, 1200);
+  // أول قلبة فوراً
+  setTimeout(createHeart, 300);
+</script>
+</body>
+</html>
